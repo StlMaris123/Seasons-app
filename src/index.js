@@ -5,7 +5,7 @@ import Spinner from './Spinner'
 
 
 class App extends React.Component {
-    state = { latt: null, errorMessage: ''}
+    state = { lat: null, errorMessage: ''}
 
     componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
@@ -14,7 +14,8 @@ class App extends React.Component {
         );
 
     }
-    render(){
+
+    renderContent() {
         if (this.state.errorMessage && !this.state.lat){
             return <div>Error: {this.state.errorMessage}</div>;
         }  
@@ -24,6 +25,13 @@ class App extends React.Component {
         }
         return <div><Spinner message="Please accepty Geolocation request"/></div>   
     }    
+
+    
+
+    render(){
+        return <div>{this.renderContent()}</div>
+    }
+        
 };
 ReactDOM.render(<App />, document.querySelector('#root'));
 
